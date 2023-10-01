@@ -19,6 +19,18 @@ $(document).ready(function () {
         timeBlock.addClass("future");
       }
 
+      // Retrieve saved event data from Local Storage
+      const savedEvent = localStorage.getItem(`event-${i}`);
+      if (savedEvent) {
+        textArea.val(savedEvent);
+      }
+
+      // Save event data to Local Storage when the Save button is clicked
+      saveButton.click(function () {
+        const eventText = textArea.val();
+        localStorage.setItem(`event-${i}`, eventText);
+      });
+
       timeBlock.append($("<div>").addClass("col-2 col-md-1 hour text-center py-3").text(hour));
       timeBlock.append(textArea);
       timeBlock.append(saveButton);
@@ -36,3 +48,4 @@ $(document).ready(function () {
   generateTimeBlocks();
   displayCurrentDay();
 });
+
